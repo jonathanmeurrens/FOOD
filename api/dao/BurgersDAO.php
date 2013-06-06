@@ -43,6 +43,8 @@ class BurgersDAO
         return array();
     }
 
+    //Jibber jabber
+
     public function updateBurgerRating($id){
         $sql = "UPDATE jack_tblBurgers
                 SET rating = rating +1
