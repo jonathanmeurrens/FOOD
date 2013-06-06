@@ -24,6 +24,7 @@ require_once WWW_ROOT . 'classes' . DS . 'Config.php';
 
 require_once WWW_ROOT . 'dao' . DS . 'BurgersDAO.php';
 require_once WWW_ROOT . 'dao' . DS . 'LocationsDAO.php';
+require_once WWW_ROOT . 'dao' . DS . 'UsersDAO.php';
 
 
 require_once 'Slim' . DS . 'Slim.php';
@@ -31,12 +32,14 @@ require_once 'Slim' . DS . 'Slim.php';
 $app = new Slim();
 
 $app->get('/burgers', 'getBurgers');
-$app->get('/burger/:id', 'getBurgerById');
-$app->put('/burger/:id', 'updateBurgerRating');
-$app->post('/burger', 'addBurger');
+$app->get('/burgers/:id', 'getBurgerById');
+$app->put('/burgers/:id', 'updateBurgerRating');
+$app->post('/burgers', 'addBurger');
+
+$app->get('/burgers/:id/users', 'getUsersByBurgerId');
 
 $app->get('/locations', 'getLocations');
-$app->get('/location/id', 'getLocationById');
+$app->get('/locations/:id', 'getLocationById');
 
 $app->run();
 
@@ -48,6 +51,11 @@ function getBurgers(){
 function getBurgerById($id){
     $burgersDAO = new BurgersDAO();
     echo json_encode($burgersDAO->getBurgerById($id));
+}
+
+function getUsersByBurgerId($id){
+    $usersDAO = new UsersDAO();
+    echo json_encode($usersDAO->getUsersByBurgerById($id));
 }
 
 function updateBurgerRating($id){

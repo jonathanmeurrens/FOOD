@@ -27,7 +27,7 @@ class BurgersDAO
     }
 
     public function getBurgerById($id){
-        $sql = "SELECT jack_tblBurgers . * , jack_tblUsers.isChef, jack_tblUsers.imageURL, jack_tblUsers.sort_id, jack_tblUsers.name AS username, jack_tblLayertypes.name AS layername
+        $sql = "SELECT jack_tblBurgers . * , jack_tblUsers.image_url, jack_tblUsers.sort_id, jack_tblUsers.name, jack_tblUsers.layer_name, jack_tblLayertypes.name AS ingredient_name
                 FROM jack_tblBurgers
                 RIGHT JOIN jack_tblUsers ON jack_tblBurgers.id = jack_tblUsers.burger_id
                 LEFT JOIN jack_tblLayertypes ON jack_tblUsers.type_id = jack_tblLayertypes.id
@@ -35,15 +35,13 @@ class BurgersDAO
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
         if($stmt->execute()){
-            $burger = $stmt->fetch();
-            if(!empty($burger)){
-                return $burger;
+            $burgers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($burgers)){
+                return $burgers;
             }
         }
         return array();
     }
-
-    //Jibber jabber
 
     public function updateBurgerRating($id){
         $sql = "UPDATE jack_tblBurgers
@@ -58,7 +56,7 @@ class BurgersDAO
     }
 
     public function addBurger(){
-        $sql = "INSERT INTO jack_tblBurgers (isServed)
+        $sql = "INSERT INTO jack_tblBurgers (is_served)
                 VALUES (0)";
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute()){

@@ -25,5 +25,21 @@ class UsersDAO
         }
     }
 
+    public function getUsersByBurgerById($id){
+        $sql = "SELECT jack_tblUsers.burger_id, jack_tblUsers.image_url, jack_tblUsers.sort_id, jack_tblUsers.name, jack_tblUsers.layer_name, jack_tblUsers.type_id,  jack_tblLayertypes.name AS ingredient_name
+                FROM jack_tblUsers
+                LEFT JOIN jack_tblLayertypes ON jack_tblUsers.type_id = jack_tblLayertypes.id
+                WHERE jack_tblUsers.burger_id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        if($stmt->execute()){
+            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($users)){
+                return $users;
+            }
+        }
+        return array();
+    }
+
 
 }
