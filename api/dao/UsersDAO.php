@@ -11,13 +11,13 @@ class UsersDAO
         $this->pdo = DatabasePDO::getInstance();
     }
 
-    public function addUser($id, $username)
+    public function addUser($id, $post)
     {
         $sql="INSERT INTO (burger_id, sort_id, name, type_id)
-              VALUES (:id, 0, :username, 5)";
+              VALUES (:id, 0, :name, 5)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
-        $stmt->bindValue(":username", $username);
+        $stmt->bindValue(":name", $post["name"]);
         if($stmt->execute()){
             return true;
         }else{

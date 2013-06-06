@@ -63,8 +63,9 @@ class BurgersDAO
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute()){
             $result = $this->pdo->lastInsertId();
+            return $result;
         }else{
-            return "";
+            return 0;
         }
     }
 

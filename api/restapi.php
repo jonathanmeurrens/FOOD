@@ -1,5 +1,7 @@
 <?php
 
+//header('Content-Type: application/json');
+
 /*
  * Modereren van commentso op nieuwsartikels
 Slechts 1 artikel om het simpel te houden
@@ -54,18 +56,20 @@ function updateBurgerRating($id){
 }
 
 function addBurger(){
-    $username = Slim::getInstance()->request()->post();
+    $post = Slim::getInstance()->request()->post();
     $burgersDAO = new BurgersDAO();
     $result = $burgersDAO->addBurger();
-    if(!empty($result)){
+    //echo json_encode($result);
+    echo json_encode(array("result"=>$result));
+    /*if(!empty($result)){
+        // create a user for the chef
         $usersDAO = new UsersDAO();
-        $result2 = $usersDAO->addUser($result, $username);
+        $result2 = $usersDAO->addUser($result, $post);
         if($result2){
             //Burger_id wordt teruggegeven
             echo json_encode($result);
         }
-    }
-
+    }*/
 }
 
 function getLocations(){
