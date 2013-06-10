@@ -54,7 +54,22 @@ class BurgersDAO
         if($stmt->execute()){
             return true;
         }
-        return array();
+        return false;
+    }
+
+    public function serveBurger($id, $post, $fileName){
+        $sql = "UPDATE jack_tblBurgers
+                SET is_served =  1, chef_name=:chef_name, name=:name, image_url=:image_url
+                WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->bindValue(":chef_name", $post["chef_name"]);
+        $stmt->bindValue(":name", $post["name"]);
+        $stmt->bindValue(":image_url", $fileName);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
     }
 
     public function addBurger(){
