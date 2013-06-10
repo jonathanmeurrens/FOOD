@@ -12,6 +12,7 @@
 class AppController {
     protected $action = '';
     protected $smarty;
+    protected $api_url;
 
     public function  __construct()
     {
@@ -20,6 +21,7 @@ class AppController {
             $this->action = $_GET['action'];
         }
 
+        $this->api_url = 'http://localhost/FOOD/api';
         $this->smarty = new Smarty();
         $this->smarty->setTemplateDir('smarty_templates');
         $this->smarty->setCompileDir('smarty_compile');

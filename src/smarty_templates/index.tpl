@@ -3,17 +3,16 @@
 <head>
 <title>Jack in the box</title>
 <link rel="Shortcut Icon" type="image/x-icon" href="images/start/favicon.ico" />
-<link href="css/screen.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
-<script type="text/javascript" src="js/modernizr.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/ajax.js"></script>
+<link href="stylesheets/screen.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/libs/modernizr.js"></script>
 </head>
 
 <body>
 <div id="container">
     {$content}
 </div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="js/libs/jquery.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 </body>
-
 </html>

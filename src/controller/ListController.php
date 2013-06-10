@@ -29,6 +29,10 @@ class ListController extends AppController {
 
     public function index(){
         trace("list");
+        $burgersjson = file_get_contents($this->api_url . '/burgers');
+        $burgers = json_decode($burgersjson, true);
+        $this->smarty->assign('burgers', $burgers);
+
         $content = $this->smarty->fetch('pages/list.tpl');
         $this->smarty->assign('content', $content);
     }

@@ -28,7 +28,13 @@ class DetailController extends AppController {
     }
 
     public function index(){
-        trace("detail");
+
+        $jsonburger = file_get_contents($this->api_url . '/burgers/'. $_GET['id']);
+        $burger = json_decode($jsonburger, true);
+
+        trace($burger);
+
+        $this->smarty->assign('burger', $burger);
         $content = $this->smarty->fetch('pages/detail.tpl');
         $this->smarty->assign('content', $content);
     }
