@@ -33,10 +33,12 @@ $app = new Slim();
 
 $app->get('/burgers', 'getBurgers');
 $app->get('/burgers/:id', 'getBurgerById');
-$app->put('/burgers/:id', 'updateBurgerRating');
+$app->put('/burgers/:id', 'updateBurger');
+$app->post('/burgers/:id/serve', 'serveBurger');
 $app->post('/burgers', 'addBurger');
 
 $app->get('/burgers/:id/users', 'getUsersByBurgerId');
+$app->post('/burgers/:id/users', 'insertUserForBurgerId');
 
 $app->get('/locations', 'getLocations');
 $app->get('/locations/:id', 'getLocationById');
@@ -58,9 +60,44 @@ function getUsersByBurgerId($id){
     echo json_encode($usersDAO->getUsersByBurgerById($id));
 }
 
+function insertUserForBurgerId($id){
+    $post = Slim::getInstance()->request()->post();
+    $usersDAO = new UsersDAO();
+
+    $file_name = uniqid(rand(), false) . '.jpeg';
+    $user_id = $usersDAO->insertUserForBurgerId($id, $post,$file_name);
+
+    if($user_id)
+    {
+        $target_path = "../images/";
+        $target_path .=$file_name;
+        if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+            echo json_encode(array("success"=>"layer added","user_id"=>$user_id));
+            die();
+        }
+        else{
+            // delete user from db
+        }
+    }
+    echo json_encode(array("error"=>"could not save layer"));
+}
+
 function updateBurgerRating($id){
     $burgersDAO = new BurgersDAO();
     echo json_encode($burgersDAO->updateBurgerRating($id));
+}
+
+function serveBurger($id){
+
+    $target_path = "../images/";
+    $target_path .=$_FILES['uploadedfile']['name'];
+    if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+        $post = Slim::getInstance()->request()->post();
+        $burgersDAO = new BurgersDAO();
+        // users = souschefs, chef name is stored in the burger table, the type of bread NOT stored in db, image of whole burger is enough, no need to store bread info
+        echo json_encode(array("result"=>$burgersDAO->serveBurger($id,$post,$_FILES['uploadedfile']['name'])));
+        die();
+    }
 }
 
 function addBurger(){
@@ -90,3 +127,18 @@ function getLocationsById($id){
     echo json_encode($locationsDAO->getLocationById($id));
 }
 
+
+
+// HELPER FUNCTIONS
+
+function  makeFileName($size=6, $path="/", $extension=".gif"){
+    //if you give a path, don't forget the slash at end
+
+    //$root = $_SERVER["DOCUMENT_ROOT"];
+    $name = rand(0, str_repeat(9, $size));
+    $name = $path.str_pad($name, 8,  0, STR_PAD_LEFT).$extension;
+    while(is_file($name)){
+        makeFileName();
+    }
+    return $path.$name;
+}
