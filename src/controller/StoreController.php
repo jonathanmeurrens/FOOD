@@ -28,7 +28,6 @@ class StoreController extends AppController {
     }
 
     public function index(){
-        trace("storectonroller");
         $content = $this->smarty->fetch('pages/store.tpl');
         $this->smarty->assign('content', $content);
     }

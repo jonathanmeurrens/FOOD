@@ -1,4 +1,24 @@
-<div id="start_balk"></div>
+<div id="start_balk">
+    <header>
+        <nav>
+            <a id="start_store_locator" href="#"></a>
+            <a id="start_burger_showoff" href="#"></a>
+        </nav>
+    </header>
+</div>
+<div id="start_blur_bg">
+    <h1>Become a shef!</h1>
+    <p>3000 <span></span> CHEFS, NOW YOU CAN MAKE YOUR OWN BURGER!</p>
+</div>
+<div id="start_table_box">
+    <div id="start_table">
+        <div id="start_cola"></div>
+        <div id="start_ui"></div>
+        <div id="start_burger"></div>
+    </div>
+</div>
+
+<div id="test"></div>
 
 <section id="start_start" class="content">
     <div id="start_bg"></div>
@@ -9,15 +29,14 @@
         </nav>
     </header>
 
-    <h1>Become a shef!</h1>
+
     <p>3000 <span id="start_jack_logo"></span> chefs, now you can make your own burger!</p>
 
     <div id="start_table">
         <div id="start_kaas"></div>
         <div id="start_vlees"></div>
-        <div id="start_groenten"></div>
-        <div id="start_cola"></div>
-        <div id="start_burger"></div>
+{*        <div id="start_cola"></div>
+        <div id="start_burger"></div>*}
         <a id="start_create_a_burger" href="#">Create a burger</a>
     </div>
 </section>
