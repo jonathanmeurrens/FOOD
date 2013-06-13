@@ -60,5 +60,16 @@ class UsersDAO
         }
     }
 
+    public function deleteUser($id){
+        $sql="DELETE FROM jack_tblUsers WHERE id=:id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }

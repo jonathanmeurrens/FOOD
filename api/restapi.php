@@ -43,6 +43,8 @@ $app->post('/burgers/:id/users', 'insertUserForBurgerId');
 $app->get('/locations', 'getLocations');
 $app->get('/locations/:id', 'getLocationById');
 
+$app->delete('/users/:id','deleteUser');
+
 $app->run();
 
 function getBurgers(){
@@ -127,6 +129,11 @@ function getLocationsById($id){
     echo json_encode($locationsDAO->getLocationById($id));
 }
 
+
+function deleteUser($id){
+    $usersDAO = new UsersDAO();
+    echo json_encode(array("result"=>$usersDAO->deleteUser($id)));
+}
 
 
 // HELPER FUNCTIONS
