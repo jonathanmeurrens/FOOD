@@ -9,15 +9,16 @@ var first = true;
 (function(){
 
 /*Store pagina*/
-    console.log("hqdsmklfjqsdf");
+    showNavigation();
     loadStores();
+
+/*List pagina */
+    listAnimation();
+
 })();
 
 function loadStores(){
 
-
-
-    console.log("hallo")
     google.maps.visualRefresh = true;;
     if(typeof google === 'object' && typeof google.maps === 'object'){
         try{
@@ -116,4 +117,40 @@ function opPinGeklikt(event, pin){
             $('#store_pop-up-box').delay(0).animate({rotate: '0deg'}, 300);
         });
     }
+}
+
+function showNavigation(){
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 760) {
+            //$('.header').slideDown(300);
+            $('.header').addClass('show_header');
+        } else {
+            //$('.header').slideUp(300);
+            $('.header').removeClass('show_header');
+        }
+    });
+}
+
+function pagination(){
+    $('#start_create_a_burger').on('click', goToStartPage);
+    $('#start_store_locator').on('click', goToStartPage);
+}
+
+function listAnimation(){
+
+    $('#columns').isotope({
+      masonryHorizontal: {
+        rowHeight: 360
+      }
+    });
+}
+
+function goToPage(e){
+
+    e.preventDefault();
+    console.log($(this).attr('href'));
+
+    $page = $(this);
+
+
 }
