@@ -28,7 +28,21 @@ class ListController extends AppController {
     }
 
     public function index(){
-        trace("list");
+
+        if(isset($_GET['ajax']) && $_GET['ajax'] == 'true'){
+            $burgersjson = file_get_contents($this->api_url . '/burgers');
+            $burgers = json_decode($burgersjson, true);
+            $this->smarty->assign('burgers', $burgers);
+
+            echo $this->smarty->fetch('pages/list.tpl');
+            //echo $this->smarty->assign('content', $content);
+            exit;
+        }
+
+        $burgersjson = file_get_contents($this->api_url . '/burgers');
+        $burgers = json_decode($burgersjson, true);
+        $this->smarty->assign('burgers', $burgers);
+
         $content = $this->smarty->fetch('pages/list.tpl');
         $this->smarty->assign('content', $content);
     }

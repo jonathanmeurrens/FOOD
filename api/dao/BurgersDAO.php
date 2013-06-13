@@ -14,7 +14,9 @@ class BurgersDAO
     public function getBurgers()
     {
         $sql = "SELECT * 
-                FROM jack_tblBurgers";
+                FROM jack_tblBurgers
+                WHERE jack_tblBurgers.is_served = 1
+                ORDER BY jack_tblBurgers.rating DESC";
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute())
         {
@@ -27,7 +29,7 @@ class BurgersDAO
     }
 
     public function getBurgerById($id){
-        $sql = "SELECT jack_tblBurgers . * , jack_tblUsers.image_url, jack_tblUsers.sort_id, jack_tblUsers.name, jack_tblUsers.layer_name, jack_tblLayertypes.name AS ingredient_name
+        $sql = "SELECT jack_tblBurgers.*, jack_tblUsers.image_url AS ingredient_image, jack_tblUsers.sort_id, jack_tblUsers.name, jack_tblLayertypes.name AS ingredient_name
                 FROM jack_tblBurgers
                 RIGHT JOIN jack_tblUsers ON jack_tblBurgers.id = jack_tblUsers.burger_id
                 LEFT JOIN jack_tblLayertypes ON jack_tblUsers.type_id = jack_tblLayertypes.id

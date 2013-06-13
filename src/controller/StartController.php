@@ -27,7 +27,6 @@ class StartController extends AppController {
     }
 
     public function index(){
-        trace("start");
         $content = $this->smarty->fetch('pages/start.tpl');
         $this->smarty->assign('content', $content);
     }

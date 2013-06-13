@@ -1,20 +1,5 @@
 <?php
 
-//header('Content-Type: application/json');
-
-/*
- * Modereren van commentso op nieuwsartikels
-Slechts 1 artikel om het simpel te houden
-de client ziet alle comments die goedgekeurd zijn
-de admin ziet gewoon alle comments met de niet goedgekeurde bovenaan
-Via een timer ziet de client nu en dan een update
-
-Client: Select where approved = true
-Client: insert comment
-Admin: update set to approved
-Admin: select all
- */
-
 define('WWW_ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 define('DS', DIRECTORY_SEPARATOR);
 

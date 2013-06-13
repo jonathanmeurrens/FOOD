@@ -1,42 +1,59 @@
-<div id="start_balk"></div>
-
-<section id="start_start" class="content">
-    <div id="start_bg"></div>
-    <header id="start_navigation">
+{$header}
+<div id="start_balk">
+    <header>
         <nav>
-        <a href="index.php?page=store">Store locator</a>
-        <a href="index.php?page=store">Burger Showoff</a>
+            <a id="start_store_locator" href="#store"></a>
+            <a id="start_burger_showoff" href="?page=list"></a>
         </nav>
     </header>
-
-    <h1>Become a shef!</h1>
-    <p>3000 <span id="start_jack_logo"></span> chefs, now you can make your own burger!</p>
-
+</div>
+<div id="start_blur_bg">
+    <h1>Become a chef!</h1>
+    <p>3000 <span></span> CHEFS, NOW YOU CAN MAKE YOUR OWN BURGER!</p>
+</div>
+<div id="start_table_box">
     <div id="start_table">
+        <div id="start_cola"></div>
+        <div id="start_ui"></div>
         <div id="start_kaas"></div>
         <div id="start_vlees"></div>
         <div id="start_groenten"></div>
-        <div id="start_cola"></div>
         <div id="start_burger"></div>
-        <a id="start_create_a_burger" href="#">Create a burger</a>
+        <a id="start_create_a_burger" href="?page=start"><span>Create a burger</span></a>
     </div>
-</section>
+</div>
 
-<section id="start_mov" class="content">
-    <section id="start_mov_left">
-        {*Movfile inplaatsen*}
+{* Promopagina onderaan *}
+<div id="promo_container" class="wood_container">
+    <section id="promo_box">
+        <section id="promo_left">
+            <div id="promo_knife"></div>
+            <div id="promo_leek"></div>
+            <div id="promo_red"></div>
+            <div id="promo_yellow"></div>
+            <div id="promo_man"></div>
+            <div id="promo_iphone"></div>
+        </section>
+        <section id="promo_right">
+            <header>
+                <h1>More friends,<br/> <span>extra flavors!</span></h1>
+            </header>
+
+            <p>Your friends are awesome, so go and make an awesome burger together!
+            <br/><br/>
+            Everybody&acute;s a layer, so each one&acute;s a flavor. Assign a chef and sous-chefs to create the world&acute;s most original burger.
+            Don&acute;t wait too long. Only 16 days left to make the best burger!</p>
+
+            <div class="clear"></div>
+            <div id="promo_counter">
+                <ul>
+                    <li id="first_number">18</li>
+                    <li id="second_number">32</li>
+                    <li id="third_number">22</li>
+                </ul>
+            </div>
+
+            <a id="promo_download" href="https://itunes.apple.com/be/genre/ios/id36?mt=8"></a>
+        </section>
     </section>
-    <section id="start_mov_right">
-        <header>
-            <h1>More friends, <br/> <span>extra flavor!</span></h1>
-        </header>
-
-        <p>Your friends are awesome, so go and make an awesome burger together!<br/>
-            Everybody’s a layer, so each one’s a flavor. Assign a chef and sous-chefs to create the world’s most original burger.
-        </p>
-
-        <a id="app_store" href="#"><span>App store</span></a>
-
-    </section>
-
-</section>
+</div>
