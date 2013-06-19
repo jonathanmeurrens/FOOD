@@ -56,7 +56,7 @@ function insertUserForBurgerId($id){
 
     if($user_id)
     {
-        $target_path = "../images/";
+        $target_path = "../images/layers/";
         $target_path .=$file_name;
         if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
             echo json_encode(array("success"=>"layer added","user_id"=>$user_id));
@@ -76,7 +76,7 @@ function updateBurgerRating($id){
 
 function serveBurger($id){
 
-    $target_path = "../images/";
+    $target_path = "../images/burgers/";
     $target_path .=$_FILES['uploadedfile']['name'];
     if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
         $post = Slim::getInstance()->request()->post();
