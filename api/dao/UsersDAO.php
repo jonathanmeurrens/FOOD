@@ -60,32 +60,5 @@ class UsersDAO
         }
     }
 
-    public function checkIp($ip, $id){
-        $sql = "SELECT * FROM jack_tblVoters WHERE ip = :ip AND burger_id = :id";
-
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':ip', $ip);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        if($stmt->rowCount() == 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public function addIp($ip, $id){
-        $sql = "INSERT INTO jack_tblVoters (ip, burger_id)
-                VALUES (:ip, :id)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':ip', $ip);
-        $stmt->bindValue(':id', $id);
-        if($stmt->execute()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
 
 }
