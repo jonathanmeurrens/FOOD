@@ -60,6 +60,17 @@ class UsersDAO
         }
     }
 
+    public function deleteUser($id){
+        $sql="DELETE FROM jack_tblUsers WHERE id=:id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function checkIp($ip, $id){
         $sql = "SELECT * FROM jack_tblVoters WHERE ip = :ip AND burger_id = :id";
 
