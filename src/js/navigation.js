@@ -1,11 +1,11 @@
 $(document).ready(init);
 
 //var api_url = "http://localhost/FOOD/api";
-var api_url = "http://192.168.0.100/FOOD/api";
-//var api_url = "http://172.30.26.141/FOOD/api";
+//var api_url = "http://192.168.0.100/FOOD/api";
+    var api_url = "http://172.30.26.141/FOOD/api";
 //var url = "http://localhost/FOOD/src/";
-var url = "http://192.168.0.100/FOOD/src/";
-//var url = "http://172.30.26.141/FOOD/src/";
+//var url = "http://192.168.0.100/FOOD/src/";
+var url = "http://172.30.26.141/FOOD/src/";
 var foreigndata;
 var filtered = false;
 var videoactive = false;

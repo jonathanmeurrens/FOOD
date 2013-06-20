@@ -28,6 +28,10 @@ $app->post('/burgers/:id/users', 'insertUserForBurgerId');
 $app->get('/locations', 'getLocations');
 $app->get('/locations/:id', 'getLocationById');
 
+$app->get('/checkip', 'checkIp');
+$app->get('/findburger', 'getBurgerByName');
+$app->get('/burgersdone', 'getFinishedBurgers');
+
 $app->run();
 
 function getBurgers(){
@@ -38,6 +42,21 @@ function getBurgers(){
 function getBurgerById($id){
     $burgersDAO = new BurgersDAO();
     echo json_encode($burgersDAO->getBurgerById($id));
+}
+
+function checkIp(){
+    $get = Slim::getInstance()->request()->get();
+    $usersDAO = new UsersDAO();
+    $result = $usersDAO->checkIp($get['ip'], $get['id']);
+    if($result){
+        echo json_encode('hasvoted');
+    }else{
+        $result2 =$usersDAO->addIp($get['ip'], $get['id']);
+        if($result2){
+            $burgersDAO = new BurgersDAO();
+            echo json_encode($burgersDAO->updateBurgerRating($get['id']));
+        }
+    }
 }
 
 function getUsersByBurgerId($id){
@@ -65,6 +84,17 @@ function insertUserForBurgerId($id){
         }
     }
     echo json_encode(array("error"=>"could not save layer"));
+}
+
+function getBurgerByName(){
+    $get = Slim::getInstance()->request()->get();
+    $burgersDAO = new BurgersDAO();
+    echo json_encode($burgersDAO->getBurgerByName($get['str']));
+}
+
+function getFinishedBurgers(){
+    $burgersDAO = new BurgersDAO();
+    echo json_encode($burgersDAO->getFinishedBurgers());
 }
 
 function updateBurgerRating($id){

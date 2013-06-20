@@ -1,5 +1,5 @@
-//var api_url = "http://172.30.26.141/FOOD/api";
-var api_url = "http://192.168.0.100/FOOD/api";
+var api_url = "http://172.30.26.141/FOOD/api";
+//var api_url = "http://192.168.0.100/FOOD/api";
 //var api_url = "http://localhost/FOOD/api";
 
 var map;
@@ -47,23 +47,14 @@ function addStores(){
                 url: api_url + '/locations',
                 success: function(data){
 
-                    var stores = data;
-                    for(var i=0; i<stores.length; i++){
                         var ii = i;
                         var image = new google.maps.MarkerImage('images/store/pin_@2x.png', null, null, null, new google.maps.Size(32,50));
-                        var myLatLng = new google.maps.LatLng(stores[ii].latitude, stores[ii].longitude);
+                        var myLatLng = new google.maps.LatLng(41.492537, -99.901813);
                         var marker = new google.maps.Marker({
                             position: myLatLng,
                             map:map,
-                            icon: image,
-                            tel: stores[ii].tel,
-                            state: stores[ii].state,
-                            street: stores[ii].street
+                            icon: image
                         });
-                        google.maps.event.addListener(marker, 'click', function(){
-                            opPinGeklikt(event, this);
-                        });
-                    }
 
                 },error:function(){
                     console.log(arguments);
@@ -77,7 +68,7 @@ function addStores(){
 }
 
 //Store geklikt op een pin
-function opPinGeklikt(event, pin){
+function opPinGeklikt(pin){
     map.setCenter(new google.maps.LatLng(pin.position.jb, pin.position.kb));
     map.setZoom(15);
 
