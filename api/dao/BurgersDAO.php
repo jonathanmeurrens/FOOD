@@ -16,6 +16,7 @@ class BurgersDAO
         $sql = "SELECT * 
                 FROM jack_tblBurgers
                 WHERE jack_tblBurgers.is_served = 1
+                AND jack_tblBurgers.rating < 300
                 ORDER BY jack_tblBurgers.rating DESC";
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute())
@@ -29,7 +30,7 @@ class BurgersDAO
     }
 
     public function getBurgerById($id){
-        $sql = "SELECT jack_tblBurgers.*, jack_tblUsers.image_url AS ingredient_image, jack_tblUsers.sort_id, jack_tblUsers.name, jack_tblLayertypes.name AS ingredient_name
+        $sql = "SELECT jack_tblBurgers.*, jack_tblUsers.image_url AS ingredient_image, jack_tblUsers.sort_id, jack_tblUsers.name AS user_name, jack_tblLayertypes.name AS ingredient_name
                 FROM jack_tblBurgers
                 RIGHT JOIN jack_tblUsers ON jack_tblBurgers.id = jack_tblUsers.burger_id
                 LEFT JOIN jack_tblLayertypes ON jack_tblUsers.type_id = jack_tblLayertypes.id
@@ -81,6 +82,36 @@ class BurgersDAO
             return $result;
         }else{
             return 0;
+        }
+    }
+
+    public function getBurgerByName($str){
+        $sql = "SELECT *
+                FROM jack_tblBurgers
+                WHERE jack_tblBurgers.is_served =1
+                AND jack_tblBurgers.name LIKE  :str
+                ORDER BY  jack_tblBurgers.rating DESC ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':str', '%' . $str . '%');
+        $stmt->execute();
+        if($stmt->rowCount() < 1){
+            return false;
+        }else{
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+
+    public function getFinishedBurgers(){
+        $sql = "SELECT * FROM jack_tblBurgers
+                WHERE jack_tblBurgers.is_served = 1
+                AND jack_tblBurgers.rating >= 300
+                ORDER BY jack_tblBurgers.rating DESC";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        if($stmt->rowCount() < 1){
+            return false;
+        }else{
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 

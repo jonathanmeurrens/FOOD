@@ -29,18 +29,83 @@ class ListController extends AppController {
 
     public function index(){
 
-        if(isset($_GET['ajax']) && $_GET['ajax'] == 'true'){
-            $burgersjson = file_get_contents($this->api_url . '/burgers');
+        if(isset($_GET['ajax']) && $_GET['ajax'] == 'done'){
+            $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+            $burgersjson = file_get_contents($this->api_url . '/burgersdone' ,false,$context);
             $burgers = json_decode($burgersjson, true);
             $this->smarty->assign('burgers', $burgers);
-
-            echo $this->smarty->fetch('pages/list.tpl');
-            //echo $this->smarty->assign('content', $content);
+            $this->smarty->assign('finished', true);
+            echo $this->smarty->fetch('parts/list-part.tpl');
             exit;
         }
 
-        $burgersjson = file_get_contents($this->api_url . '/burgers');
+        if(isset($_GET['ajax']) && $_GET['ajax'] == 'search'){
+            if(!empty($_GET['str'])){
+                $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+                $burgersjson = file_get_contents($this->api_url . '/findburger?str=' . $_GET['str'],false,$context);
+                if($burgersjson != 'false'){
+                    $burgers = json_decode($burgersjson, true);
+                    $this->smarty->assign('burgers', $burgers);
+
+                    echo $this->smarty->fetch('parts/list-part.tpl');
+                    exit;
+                }else{
+                    echo 'no_records';
+                    exit;
+                }
+
+            }else{
+                echo 'leeg';
+                exit;
+            }
+        }
+
+        if(isset($_GET['ajax']) && $_GET['ajax'] == 'true'){
+            $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+            $burgersjson = file_get_contents($this->api_url . '/burgers',false,$context);
+            $burgers = json_decode($burgersjson, true);
+
+            $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+            $bestburgerjson = file_get_contents($this->api_url . '/burgers/' . $burgers[0]['id'],false,$context);
+            $bestburger = json_decode($bestburgerjson, true);
+
+/*            $ipjson = file_get_contents('http://smart-ip.net/geoip-json?callback=?',false,$context);
+            $ip = json_decode($ipjson);
+
+            $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+            $votedjson = file_get_contents($this->api_url . '/checkip?ip=' . $ip . '&id=' . $burgers[0]['id'], false, $context);
+            if(json_decode($votedjson) == 'hasvoted'){
+                $this->smarty->assign('voted', true);
+            }*/
+
+            $names = '';
+            foreach($bestburger as $burger){
+                $names .= $burger['user_name'] . ', ';
+            }
+            $names = substr($names, 0, -2);
+
+            $this->smarty->assign('burgernames', $names);
+            $this->smarty->assign('burgers', $burgers);
+
+            echo $this->smarty->fetch('pages/list.tpl');
+            exit;
+        }
+
+        $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+        $burgersjson = file_get_contents($this->api_url . '/burgers',false,$context);
         $burgers = json_decode($burgersjson, true);
+
+        $context = stream_context_create(array("http"=>array("header"=>"Connection: close \r\n")));
+        $bestburgerjson = file_get_contents($this->api_url . '/burgers/' . $burgers[0]['id'],false,$context);
+        $bestburger = json_decode($bestburgerjson, true);
+
+        $names = '';
+        foreach($bestburger as $burger){
+            $names .= $burger['user_name'] . ', ';
+        }
+        $names = substr($names, 0, -2);
+
+        $this->smarty->assign('burgernames', $names);
         $this->smarty->assign('burgers', $burgers);
 
         $content = $this->smarty->fetch('pages/list.tpl');

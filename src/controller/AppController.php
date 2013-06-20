@@ -29,6 +29,7 @@ class AppController {
 
         $header = $this->smarty->fetch('parts/header-part.tpl');
         $this->smarty->assign('header', $header);
+
     }
 
     public function filter(){}

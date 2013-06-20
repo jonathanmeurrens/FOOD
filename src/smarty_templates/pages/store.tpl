@@ -5,6 +5,7 @@
         <p id="store_tel"></p>
         <p id="store_street"></p>
         <p id="store_state"></p>
+        <a id="store_close_btn" href="#"></a>
         <a id="store_directions" href="#"></a>
     </section>
 </div>

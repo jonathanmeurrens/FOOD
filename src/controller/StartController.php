@@ -27,6 +27,12 @@ class StartController extends AppController {
     }
 
     public function index(){
+
+        if(isset($_GET['ajax']) && $_GET['ajax'] == 'true'){
+            echo $this->smarty->fetch('pages/start.tpl');
+            exit;
+        }
+
         $content = $this->smarty->fetch('pages/start.tpl');
         $this->smarty->assign('content', $content);
     }

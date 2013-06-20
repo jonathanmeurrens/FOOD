@@ -1,0 +1,80 @@
+/*
+* VIDEO SKIN
+*/
+
+
+.video_start_playing{
+  display: block !important;
+  opacity: 1 !important;
+}
+
+#videocontainer {
+  display: none;
+  position: relative;
+  width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    margin-bottom: 100px;
+
+    transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+}
+
+#playBtnOverlay {
+  width: 100%;
+  height: 96%;
+  cursor: pointer;
+}
+
+#videocontroller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#bottomControls {
+  height: 20px;
+}
+
+.fullscrButton {
+  float: right;
+  width: 16px;
+  height: 100%;
+  text-indent: -999999px;
+  margin-right: 12px;
+  background: url("../images/video/fullscreen_btn.png") no-repeat;
+}
+
+.playButton {
+  background: url("../images/video/play_btn.png") no-repeat;
+  width: 14px;
+  height: 100%;
+  text-indent: -9999999px;
+  float: left;
+  margin-left: 12px;
+}
+
+.pauseButton {
+  background: url("../images/video/pause_btn.png") no-repeat;
+}
+
+#scrubber_container {
+  background: url("../images/video/scrubber_container.png") repeat-x;
+  cursor: pointer;
+  width: 92.3%;
+  height: 100%;
+  position: relative;
+  float: left;
+  margin-left: 10px;
+}
+
+#scrubber {
+  background: url("../images/video/scrubber.png") repeat-x;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+}
