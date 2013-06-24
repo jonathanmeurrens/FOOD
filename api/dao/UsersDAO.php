@@ -13,7 +13,7 @@ class UsersDAO
 
     public function addUser($id, $post)
     {
-        $sql="INSERT INTO jack_tblUsers (burger_id, sort_id, name, type_id)
+        $sql="INSERT INTO jack_tblUsers (burger_id, name, type_id)
               VALUES (:id, 0, :name, 5)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
@@ -26,7 +26,7 @@ class UsersDAO
     }
 
     public function getUsersByBurgerById($id){
-        $sql = "SELECT jack_tblUsers.id, jack_tblUsers.burger_id, jack_tblUsers.image_url, jack_tblUsers.sort_id, jack_tblUsers.name, jack_tblUsers.layer_name, jack_tblUsers.type_id,  jack_tblLayertypes.name AS ingredient_name
+        $sql = "SELECT jack_tblUsers.id, jack_tblUsers.burger_id, jack_tblUsers.image_url, jack_tblUsers.name, jack_tblUsers.layer_name, jack_tblUsers.type_id,  jack_tblLayertypes.name AS ingredient_name
                 FROM jack_tblUsers
                 LEFT JOIN jack_tblLayertypes ON jack_tblUsers.type_id = jack_tblLayertypes.id
                 WHERE jack_tblUsers.burger_id = :id";

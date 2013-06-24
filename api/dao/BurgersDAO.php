@@ -30,7 +30,7 @@ class BurgersDAO
     }
 
     public function getBurgerById($id){
-        $sql = "SELECT jack_tblBurgers.*, jack_tblUsers.image_url AS ingredient_image, jack_tblUsers.sort_id, jack_tblUsers.name AS user_name, jack_tblLayertypes.name AS ingredient_name
+        $sql = "SELECT jack_tblBurgers.*, jack_tblUsers.image_url AS ingredient_image, jack_tblUsers.type_id, jack_tblUsers.name AS user_name, jack_tblLayertypes.name AS ingredient_name
                 FROM jack_tblBurgers
                 RIGHT JOIN jack_tblUsers ON jack_tblBurgers.id = jack_tblUsers.burger_id
                 LEFT JOIN jack_tblLayertypes ON jack_tblUsers.type_id = jack_tblLayertypes.id
